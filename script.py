@@ -6,6 +6,7 @@ import time
 
 temp_hum_sensor = 7 # for Temperature & Humidity Sensor
 light_sensor = 0 # for Light Sensor
+light_threshold = 500
 
 grovepi.pinMode(light_sensor,"INPUT") # light sensor
 while True:
@@ -21,6 +22,10 @@ while True:
         # For light, starts
         light_sensor_value = grovepi.analogRead(light_sensor)
         print("sensor_value = %d " %(light_sensor_value))
+        if light_sensor_value < light_threshold:
+            dweepy.dweet_for('cba-hk-iot-light',{'light_alert':'on'})
+        else:
+            dweepy.dweet_for('cba-hk-iot-light',{'light_alert':'off'})
         dweepy.dweet_for('cba-hk-iot-light',{'light':light_sensor_value})
         time.sleep(.01)
         # For light, ends
