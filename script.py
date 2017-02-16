@@ -27,7 +27,7 @@ while True:
         # Getting value temp & hum, ends
 
         # Getting value light, starts
-        time.sleep(0.7)
+        time.sleep(1)
         light_sensor_value = grovepi.analogRead(light_sensor)
         print("sensor_value = %d " %(light_sensor_value))
         light_alert = 0
@@ -44,6 +44,7 @@ while True:
             'light':light_sensor_value,
             'light_alert':light_alert})
         # Sending out data, ends
-        time.sleep(.001)
-    except IOError:
-        print ("Error")
+        time.sleep(1)
+    except Exception as e:
+        print ("Error: ",str(e))
+        pass
