@@ -15,8 +15,8 @@ light_threshold = 500 # general unit
 grovepi.pinMode(light_sensor,"INPUT") # light sensor
 
 # testing
-setText("Hello world\nLCD test")
-setRGB(0,128,64)
+# setText("Hello world\nLCD test")
+# setRGB(0,128,64)
 
 # Slowly change the colors every 0.01 seconds.
 # for c in range(0,255):
