@@ -22,10 +22,12 @@ grovepi.pinMode(light_sensor,"INPUT") # light sensor
 
 # testing
 def lightOn():
+    setText("UV light On")
     setRGB(0,255,0)
     return
 
 def lightOff():
+    setText("UV light Off")
     setRGB(0,0,0)
     return
 
@@ -51,6 +53,8 @@ while True:
         if light_sensor_value < light_threshold:
             light_alert = 1 #to turn on the light alert
             lightOn()
+        else:
+            lightOff()
         # Getting value light, ends
 
         # Sending out data, starts
