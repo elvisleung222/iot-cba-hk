@@ -3,7 +3,7 @@ import grovepi
 import math
 import dweepy
 import time
-# from grove_rgb_lcd import * # for Grove-LCD RGB Backlight
+from grove_rgb_lcd import * # for Grove-LCD RGB Backlight
 
 temp_hum_sensor = 7 # for Temperature & Humidity Sensor
 light_sensor = 0 # for Light Sensor
@@ -19,13 +19,15 @@ grovepi.pinMode(light_sensor,"INPUT") # light sensor
 # setRGB(0,128,64)
 
 # Slowly change the colors every 0.01 seconds.
-# for c in range(0,255):
-#     setRGB(c,255-c,0)
-#     time.sleep(0.01)
 
-# setRGB(0,255,0)
-# setText("Bye bye, this should wrap")
 # testing
+def lightOn():
+    setRGB(0,255,0)
+    return
+
+def lightOff():
+    setRGB(0,0,0)
+    return
 
 while True:
     try:
@@ -48,6 +50,7 @@ while True:
         light_alert = 0
         if light_sensor_value < light_threshold:
             light_alert = 1 #to turn on the light alert
+            lightOn()
         # Getting value light, ends
 
         # Sending out data, starts
