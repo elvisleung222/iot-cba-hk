@@ -62,8 +62,8 @@ while True:
         # Getting value light, ends
         # Counting time
         nowTime = time.time()
-        timeDiff = timedelta(seconds = int(nowTime - startTime))
-        print(timeDiff)
+        td = timedelta(seconds = int(nowTime - startTime))
+        print(td)
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
             'temperature':temp,
