@@ -68,7 +68,7 @@ while True:
         # Sending out data, starts
         naturalLight = naturalLight + int(light_sensor_value) * int(td.seconds)
         dweepy.dweet_for('cba-hk-iot',{
-            'time_fried':td,
+            'time_fried':str(td),
             'natural_sunlight_exposure':naturalLight,
             'extra_sunlight_exposure':1,
             'temperature':temp,
