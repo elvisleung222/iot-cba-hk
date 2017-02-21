@@ -68,11 +68,11 @@ while True:
             light_alert = 1 #to turn on the light alert
             lightOn()
             extraLight = extraLight + (int(light_sensor_value) * int(td.seconds))
-            extraLight_time = extraLight_time + int(td.seconds - lastTime)
+            extraLight_time = extraLight_time + (int(td.seconds) - int(lastTime))
         else:
             lightOff()
             naturalLight = naturalLight + (int(light_sensor_value) * int(td.seconds))
-            naturalLight_time = naturalLight_time + int(td.seconds - lastTime)
+            naturalLight_time = naturalLight_time + (int(td.seconds) - int(lastTime))
         print(extraLight_time)
         print(naturalLight_time)
             
