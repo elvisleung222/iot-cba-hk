@@ -89,7 +89,7 @@ while True:
             'hum_alert':hum_alert,
             'light':light_sensor_value,
             'light_alert':light_alert})
-        lastTime = td
+        lastTime = int(td)
         time.sleep(1)
     except Exception as e:
         print ("Error: ",str(e))
