@@ -74,9 +74,9 @@ while True:
         dweepy.dweet_for('cba-hk-iot',{
             'time_fried':str(td),
             'natural_sunlight_exposure':naturalLight,
-            'natural_sunlight_time':timedelta(seconds = naturalLight_time),
+            'natural_sunlight_time':str(timedelta(seconds = naturalLight_time)),
             'extra_sunlight_exposure':extraLight,
-            'extra_sunlight_time':timedelta(seconds = extraLight_time),
+            'extra_sunlight_time':str(timedelta(seconds = extraLight_time)),
             'temperature':temp,
             'temp_alert':temp_alert,
             'humidity':humidity,
