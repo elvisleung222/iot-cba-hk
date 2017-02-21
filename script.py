@@ -3,6 +3,8 @@ import grovepi
 import math
 import dweepy
 import time
+from datetime import timedelta
+
 from grove_rgb_lcd import * # for Grove-LCD RGB Backlight
 
 temp_hum_sensor = 7 # for Temperature & Humidity Sensor
@@ -60,7 +62,7 @@ while True:
         # Getting value light, ends
         # Counting time
         nowTime = time.time()
-        timeDiff = startTime - nowTime
+        timeDiff = timedelta(seconds = int(nowTime - startTime))
         print(timeDiff)
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
