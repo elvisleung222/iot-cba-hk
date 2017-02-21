@@ -34,7 +34,7 @@ def lightOff():
     return
 
 startTime = time.time()
-lastTime = 0
+lastTime.seconds = 0
 naturalLight = 0
 naturalLight_time = 0 # in seconds
 extraLight = 0
@@ -68,11 +68,11 @@ while True:
             light_alert = 1 #to turn on the light alert
             lightOn()
             extraLight = extraLight + (int(light_sensor_value) * int(td.seconds))
-            extraLight_time = extraLight_time + (int(td.seconds) - int(lastTime))
+            extraLight_time = extraLight_time + (int(td.seconds) - int(lastTime.seconds))
         else:
             lightOff()
             naturalLight = naturalLight + (int(light_sensor_value) * int(td.seconds))
-            naturalLight_time = naturalLight_time + (int(td.seconds) - int(lastTime))
+            naturalLight_time = naturalLight_time + (int(td.seconds) - int(lastTime.seconds))
         print(extraLight_time)
         print(naturalLight_time)
             
@@ -89,7 +89,7 @@ while True:
             'hum_alert':hum_alert,
             'light':light_sensor_value,
             'light_alert':light_alert})
-        lastTime = int(td)
+        lastTime = td
         time.sleep(1)
     except Exception as e:
         print ("Error: ",str(e))
