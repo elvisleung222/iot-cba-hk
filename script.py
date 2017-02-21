@@ -31,6 +31,8 @@ def lightOff():
     setRGB(0,0,0)
     return
 
+startTime = time.time()
+
 while True:
     try:
         # Getting value temp & hum , starts
@@ -56,7 +58,10 @@ while True:
         else:
             lightOff()
         # Getting value light, ends
-
+        # Counting time
+        nowTime = time.time()
+        timeDiff = startTime - nowTime
+        print(timeDiff)
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
             'temperature':temp,
