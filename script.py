@@ -34,6 +34,8 @@ def lightOff():
     return
 
 startTime = time.time()
+naturalLight = 0
+extraLight = 0
 
 while True:
     try:
@@ -63,10 +65,12 @@ while True:
         # Counting time
         nowTime = time.time()
         td = timedelta(seconds = int(nowTime - startTime))
-        print(td)
         # Sending out data, starts
+        naturalLight = naturalLight + int(light_sensor_value) * int(td.seconds)
         dweepy.dweet_for('cba-hk-iot',{
             'time_fried':td,
+            'natural_sunlight_exposure':naturalLight,
+            'extra_sunlight_exposure':1,
             'temperature':temp,
             'temp_alert':temp_alert,
             'humidity':humidity,
