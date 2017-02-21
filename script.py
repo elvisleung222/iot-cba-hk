@@ -66,6 +66,7 @@ while True:
         print(td)
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
+            'time_fried':td,
             'temperature':temp,
             'temp_alert':temp_alert,
             'humidity':humidity,
