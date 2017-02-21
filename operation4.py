@@ -4,4 +4,4 @@ import time;
 localtime = time.localtime(time.time())
 print localtime
 print "---------------------------------"
-print localtime.tm_year+"-"+localtime.tm_mon+"-"+localtime.tm_mday
+print str(localtime.tm_year)+"-"+str(localtime.tm_mon)+"-"+str(localtime.tm_mday)
