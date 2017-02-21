@@ -64,15 +64,17 @@ while True:
             light_alert = 1 #to turn on the light alert
             lightOn()
             extraLight = extraLight + int(light_sensor_value) * int(td.seconds)
+            extraLight_time = extraLight_time + int(td.seconds)
         else:
             lightOff()
             naturalLight = naturalLight + int(light_sensor_value) * int(td.seconds)
+            naturalLight_time = naturalLight_time + int(td.seconds)
             
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
             'time_fried':str(td),
             'natural_sunlight_exposure':naturalLight,
-            'natural_sunlight_time':timedelta(seconds = natural_sunlight_time),
+            'natural_sunlight_time':timedelta(seconds = naturalLight_time),
             'extra_sunlight_exposure':extraLight,
             'extra_sunlight_time':timedelta(seconds = extraLight_time),
             'temperature':temp,
