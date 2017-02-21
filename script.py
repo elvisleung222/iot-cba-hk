@@ -34,7 +34,7 @@ def lightOff():
     return
 
 startTime = time.time()
-lastTime.seconds = 0
+lastTime = timedelta(seconds=0)
 naturalLight = 0
 naturalLight_time = 0 # in seconds
 extraLight = 0
