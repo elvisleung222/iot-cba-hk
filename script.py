@@ -35,9 +35,9 @@ def lightOff():
 
 startTime = time.time()
 naturalLight = 0
-naturalLight_time = 0
+naturalLight_time = 0 # in seconds
 extraLight = 0
-extraLight_time = 0
+extraLight_time = 0 # in seconds
 
 while True:
     try:
@@ -60,6 +60,7 @@ while True:
         nowTime = time.time()
         td = timedelta(seconds = int(nowTime - startTime))
         light_alert = 0
+        print ("td.cesonds: "+td.seconds)
         if light_sensor_value < light_threshold:
             light_alert = 1 #to turn on the light alert
             lightOn()
