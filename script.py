@@ -34,6 +34,7 @@ def lightOff():
     return
 
 startTime = time.time()
+lastTime = 0
 naturalLight = 0
 naturalLight_time = 0 # in seconds
 extraLight = 0
@@ -57,19 +58,21 @@ while True:
         light_sensor_value = grovepi.analogRead(light_sensor)
         print("sensor_value = %d " %(light_sensor_value))
         # Counting time
+        
         nowTime = time.time()
         td = timedelta(seconds = int(nowTime - startTime))
+        
         light_alert = 0
         print ("td.cesonds: "+str(td.seconds))
         if light_sensor_value < light_threshold:
             light_alert = 1 #to turn on the light alert
             lightOn()
             extraLight = extraLight + (int(light_sensor_value) * int(td.seconds))
-            extraLight_time = extraLight_time + int(td.seconds)
+            extraLight_time = extraLight_time + int(td.seconds - lastTime)
         else:
             lightOff()
             naturalLight = naturalLight + (int(light_sensor_value) * int(td.seconds))
-            naturalLight_time = naturalLight_time + int(td.seconds)
+            naturalLight_time = naturalLight_time + int(td.seconds - lastTime)
         print(extraLight_time)
         print(naturalLight_time)
             
@@ -86,6 +89,7 @@ while True:
             'hum_alert':hum_alert,
             'light':light_sensor_value,
             'light_alert':light_alert})
+        lastTime = td
         time.sleep(1)
     except Exception as e:
         print ("Error: ",str(e))
