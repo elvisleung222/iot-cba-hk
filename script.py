@@ -35,7 +35,9 @@ def lightOff():
 
 startTime = time.time()
 naturalLight = 0
+naturalLight_time = 0
 extraLight = 0
+extraLight_time = 0
 
 while True:
     try:
@@ -49,35 +51,36 @@ while True:
             hum_alert = 1 #to turn on the humidity alert
         if math.isnan(temp) == False and math.isnan(humidity) == False:
             print("temperature = %.02f C humidity =%.02f%%"%(temp, humidity))
-        # Getting value temp & hum, ends
 
         # Getting value light, starts
         time.sleep(1)
         light_sensor_value = grovepi.analogRead(light_sensor)
         print("sensor_value = %d " %(light_sensor_value))
+        # Counting time
+        nowTime = time.time()
+        td = timedelta(seconds = int(nowTime - startTime))
         light_alert = 0
         if light_sensor_value < light_threshold:
             light_alert = 1 #to turn on the light alert
             lightOn()
+            extraLight = extraLight + int(light_sensor_value) * int(td.seconds)
         else:
             lightOff()
-        # Getting value light, ends
-        # Counting time
-        nowTime = time.time()
-        td = timedelta(seconds = int(nowTime - startTime))
+            naturalLight = naturalLight + int(light_sensor_value) * int(td.seconds)
+            
         # Sending out data, starts
-        naturalLight = naturalLight + int(light_sensor_value) * int(td.seconds)
         dweepy.dweet_for('cba-hk-iot',{
             'time_fried':str(td),
             'natural_sunlight_exposure':naturalLight,
-            'extra_sunlight_exposure':1,
+            'natural_sunlight_time':timedelta(seconds = natural_sunlight_time),
+            'extra_sunlight_exposure':extraLight,
+            'extra_sunlight_time':timedelta(seconds = extraLight_time),
             'temperature':temp,
             'temp_alert':temp_alert,
             'humidity':humidity,
             'hum_alert':hum_alert,
             'light':light_sensor_value,
             'light_alert':light_alert})
-        # Sending out data, ends
         time.sleep(1)
     except Exception as e:
         print ("Error: ",str(e))
