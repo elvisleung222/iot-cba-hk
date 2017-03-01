@@ -54,8 +54,7 @@ while True:
         if humidity < hum_threshold:
             hum_alert = 1 #to turn on the humidity alert
         if math.isnan(temp) == False and math.isnan(humidity) == False:
-#             print("temperature = %.02f C humidity =%.02f%%"%(temp, humidity))
-
+            print("temperature = %.02f C humidity =%.02f%%"%(temp, humidity))
         # Getting value light, starts
         time.sleep(1)
         light_sensor_value = grovepi.analogRead(light_sensor)
