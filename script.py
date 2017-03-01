@@ -24,12 +24,12 @@ grovepi.pinMode(light_sensor,"INPUT") # light sensor
 
 # testing
 def lightOn():
-    setText("UV light On")
-    setRGB(0,255,0)
+    setText("Need Extra Light")
+    setRGB(255,0,0)
     return
 
 def lightOff():
-    setText("UV light Off")
+    setText("Healthy")
     setRGB(0,0,0)
     return
 
@@ -39,6 +39,9 @@ naturalLight = 0
 naturalLight_time = 0 # in seconds
 extraLight = 0
 extraLight_time = 0 # in seconds
+
+setText("Running...")
+setRGB(0,255,0)
 
 while True:
     try:
@@ -51,12 +54,12 @@ while True:
         if humidity < hum_threshold:
             hum_alert = 1 #to turn on the humidity alert
         if math.isnan(temp) == False and math.isnan(humidity) == False:
-            print("temperature = %.02f C humidity =%.02f%%"%(temp, humidity))
+            # print("temperature = %.02f C humidity =%.02f%%"%(temp, humidity))
 
         # Getting value light, starts
         time.sleep(1)
         light_sensor_value = grovepi.analogRead(light_sensor)
-        print("sensor_value = %d " %(light_sensor_value))
+        # print("sensor_value = %d " %(light_sensor_value))
         # Counting time
         
         nowTime = time.time()
@@ -73,8 +76,8 @@ while True:
             lightOff()
             naturalLight = naturalLight + (int(light_sensor_value) * (int(td.seconds) - int(lastTime.seconds)))
             naturalLight_time = naturalLight_time + (int(td.seconds) - int(lastTime.seconds))
-        print(extraLight_time)
-        print(naturalLight_time)
+        # print(extraLight_time)
+        # print(naturalLight_time)
             
         # Sending out data, starts
         dweepy.dweet_for('cba-hk-iot',{
@@ -92,5 +95,5 @@ while True:
         lastTime = td
         time.sleep(1)
     except Exception as e:
-        print ("Error: ",str(e))
+        # print ("Error: ",str(e))
         pass
